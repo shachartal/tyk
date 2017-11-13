@@ -430,6 +430,7 @@ func processSpec(spec *APISpec, apisByListen map[string]int,
 			mwAppendEnabled(&chainArray, &CoProcessMiddleware{baseMid, coprocess.HookType_PostKeyAuth, obj.Name, mwDriver})
 		}
 
+		mwAppendEnabled(&chainArray, &StripAuth{baseMid})
 		mwAppendEnabled(&chainArray, &KeyExpired{baseMid})
 		mwAppendEnabled(&chainArray, &AccessRightsCheck{baseMid})
 		mwAppendEnabled(&chainArray, &RateLimitForAPI{BaseMiddleware: baseMid})
@@ -637,5 +638,4 @@ func loadApps(specs []*APISpec, muxer *mux.Router) {
 		startRPCKeepaliveWatcher(rpcAuthStore)
 		startRPCKeepaliveWatcher(rpcOrgStore)
 	}
-
 }

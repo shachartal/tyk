@@ -136,6 +136,7 @@ type APISpec struct {
 	HasRun                   bool
 	ServiceRefreshInProgress bool
 	HTTPTransport            http.RoundTripper
+	StripAuthData            bool
 }
 
 // APIDefinitionLoader will load an Api definition from a storage
